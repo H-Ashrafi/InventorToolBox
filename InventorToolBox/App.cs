@@ -44,7 +44,6 @@ namespace InventorToolBox
             }
         }
         public static Application InventorApp=>_Inventor;
-       
         public static IManager GetManager (kManagerTypes mangerType)
         {
             switch (mangerType)

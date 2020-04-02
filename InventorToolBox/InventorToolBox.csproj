@@ -52,19 +52,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationHelper.cs" />
-    <Compile Include="AssemblyManager.cs" />
-    <Compile Include="BomManager.cs" />
-    <Compile Include="DocumentManager.cs" />
-    <Compile Include="DrawingManager.cs" />
+    <Compile Include="Managers\AssemblyManager.cs" />
+    <Compile Include="Managers\BomManager.cs" />
+    <Compile Include="Managers\DocumentManager.cs" />
+    <Compile Include="Managers\DrawingManager.cs" />
+    <Compile Include="Managers\ExtensionIBomManger.cs" />
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AutoMeasure.cs" />
-    <Compile Include="IinventorManager.cs" />
-    <Compile Include="IPropertyManager.cs" />
-    <Compile Include="PartManager.cs" />
-    <Compile Include="PresentationManger.cs" />
+    <Compile Include="Managers\IinventorManager.cs" />
+    <Compile Include="Managers\IPropertyManager.cs" />
+    <Compile Include="Managers\PartManager.cs" />
+    <Compile Include="Managers\PresentationManger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SketchManager.cs" />
+    <Compile Include="Managers\SketchManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

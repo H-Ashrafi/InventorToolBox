@@ -1,0 +1,14 @@
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.exe.config
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.exe
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.pdb
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBox.dll
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBox.pdb
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.csprojAssemblyReference.cache
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.csproj.CopyComplete
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.exe
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.pdb
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.exe.config
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\Autodesk.iLogic.Types.dll
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\Autodesk.iLogic.Interfaces.xml
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\Autodesk.iLogic.Types.xml
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\en-US\Autodesk.iLogic.Types.resources.dll

@@ -48,7 +48,7 @@ namespace InventorToolBox
         {
             switch (mangerType)
             {
-                case kManagerTypes.Document:return new DocumentManager();
+                //case kManagerTypes.Document:return new DocumentManager();
                 case kManagerTypes.Part: return new PartManager();
                 case kManagerTypes.Assembly: return new AssemblyManager();
                 case kManagerTypes.Drawing:return new DrawingManager();

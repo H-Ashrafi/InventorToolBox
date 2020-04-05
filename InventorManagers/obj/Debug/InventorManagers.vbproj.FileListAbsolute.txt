@@ -1,0 +1,3 @@
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorManagers\obj\Debug\InventorManagers.vbprojAssemblyReference.cache
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorManagers\obj\Debug\InventorManagers.Resources.resources
+C:\Users\LocalUser\source\repos\InventorToolBox\InventorManagers\obj\Debug\InventorManagers.vbproj.GenerateResource.cache

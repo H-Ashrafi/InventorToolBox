@@ -56,10 +56,10 @@
     <Compile Include="Managers\BomManager.cs" />
     <Compile Include="Managers\DocumentManager.cs" />
     <Compile Include="Managers\DrawingManager.cs" />
-    <Compile Include="Managers\ExtensionIBomManger.cs" />
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AutoMeasure.cs" />
+    <Compile Include="Extensions\ComponentOccurances.Extension.cs" />
     <Compile Include="Managers\IinventorManager.cs" />
     <Compile Include="Managers\IPropertyManager.cs" />
     <Compile Include="Managers\PartManager.cs" />

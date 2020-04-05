@@ -1,7 +1,7 @@
 ﻿using Inventor;
 namespace InventorToolBox
 {
-    public static class ApplicationHelper
+    public static class DocumentExtensions
     {
         /// <summary>
         /// creates a new part document

@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="Extensions\Document.Extensions.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="Managers\BomManager.cs" />
     <Compile Include="Managers\DocumentManager.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AutoMeasure.cs" />
-    <Compile Include="Extensions\ComponentOccurances.Extension.cs" />
+    <Compile Include="Extensions\ComponentOccurances.Extensions.cs" />
     <Compile Include="Managers\IinventorManager.cs" />
     <Compile Include="Managers\IPropertyManager.cs" />
     <Compile Include="Managers\PartManager.cs" />

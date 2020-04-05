@@ -58,7 +58,6 @@
     <Compile Include="Managers\DrawingManager.cs" />
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="AutoMeasure.cs" />
     <Compile Include="Extensions\ComponentOccurances.Extensions.cs" />
     <Compile Include="Managers\IinventorManager.cs" />
     <Compile Include="Managers\IPropertyManager.cs" />

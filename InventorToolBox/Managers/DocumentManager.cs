@@ -2,9 +2,9 @@
 using Inventor;
 namespace InventorToolBox
 {
-    public static class DocumentManager 
+    public class DocumentManager :IManager
     {
-        public static Document GetDocument(Application InventorApplicaiton, string fullFileName, bool openVisible = true)
+        public Document GetDocument(Application InventorApplicaiton, string fullFileName, bool openVisible = true)
         {
             if (System.IO.File.Exists(fullFileName))
                 return InventorApplicaiton.Documents.Open(fullFileName, openVisible);

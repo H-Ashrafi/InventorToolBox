@@ -59,8 +59,8 @@
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Extensions\ComponentOccurances.Extensions.cs" />
-    <Compile Include="Managers\IinventorManager.cs" />
-    <Compile Include="Managers\IPropertyManager.cs" />
+    <Compile Include="Managers\IManager.cs" />
+    <Compile Include="Managers\iPropertiesManager.cs" />
     <Compile Include="Managers\PartManager.cs" />
     <Compile Include="Managers\PresentationManger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

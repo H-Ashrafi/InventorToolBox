@@ -44,20 +44,7 @@ namespace InventorToolBox
             }
         }
         public static Application InventorApp=>_Inventor;
-        public static IManager GetManager (kManagerTypes mangerType)
-        {
-            switch (mangerType)
-            {
-                //case kManagerTypes.Document:return new DocumentManager();
-                case kManagerTypes.Part: return new PartManager();
-                case kManagerTypes.Assembly: return new AssemblyManager();
-                case kManagerTypes.Drawing:return new DrawingManager();
-                case kManagerTypes.Presentation:return new PresentationManger();
-                case kManagerTypes.iProperties:return new iPropertiesManager();
-                case kManagerTypes.BOM:return new AssemblyDocumentExtensions();
-                default: return null;
-            }
-        }
+        
         public static Document ActiveDocument => _Inventor.ActiveDocument;
     }
 }

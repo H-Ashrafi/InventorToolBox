@@ -1,42 +1,43 @@
-﻿using static InventorToolBox.App;
-using InventorToolBox;
-using Inventor;
+﻿using InventorToolBox;
 using System;
 
 namespace InventorToolBoxConsole
 {
+    /// <summary>
+    /// a console app as a sample applicaiton for InventorToolbox
+    /// </summary>
     class Program
     {
-        //public static AutoInvent app = AutoInvent.Initiate;
         static void Main(string[] args)
         {
-            TestAPI();
-        }
+            //message to user
+            Console.WriteLine("Part Number of active document:");
 
-        private static void TestAPI()
-        {
-            ConnectToInventor();
-            Console.WriteLine(GetQty().ToString());
+            //run the funcions
+            Console.WriteLine(GetPartNumberOfActiveDocument());
             Console.ReadLine();
         }
 
-        private static int GetQty()
+        /// <summary>
+        /// get the part number of active document
+        /// </summary>
+        /// <returns>returns part number of active doc as string and empty string if not of type string</returns>
+        private static string GetPartNumberOfActiveDocument()
         {
-            var bomManager = new AssemblyDocumentExtensions();
-            var docManager = new DocumentManager();
-            var assembly = docManager.GetDocument(InventorApp, @"C:\CAD\Designs\0143-GMW-2019-10 - Yarrawonga Spillway\0143-GMW-2019-1000 - NORTH WEIR\MODULE 1\STAIRWAY_1\STAIRWAY.iam");
-            var target =   docManager.GetDocument(InventorApp, @"C:\CAD\Designs\0143-GMW-2019-10 - Yarrawonga Spillway\0143-GMW-2019-1000 - NORTH WEIR\MODULE 1\STAIRWAY_1\Mebmers of STRINGER\STRINGER_MEMBER_001.ipt");
-            var target2 = docManager.GetDocument(InventorApp, @"C:\CAD\Designs\0143-GMW-2019-10 - Yarrawonga Spillway\0143-GMW-2019-1000 - NORTH WEIR\MODULE 1\STAIRWAY_1\skeleton.ipt");
-            var target3 = docManager.GetDocument(InventorApp, @"C:\CAD\Designs\0143-GMW-2019-10 - Yarrawonga Spillway\0143-GMW-2019-1000 - NORTH WEIR\MODULE 1\STAIRWAY_1\GUARDRAIL.iam");
-         
-            return bomManager.GetPartsOnlyQuantity(target2, (AssemblyDocument)assembly,true);
-        }
+            //get an instance of Inventor
+            App.ConnectToInventor();
 
-        private static void TestPropertyManager()
-        {
-            var propetyManager = (iPropertiesManager)GetManager(kManagerTypes.iProperties);
-            propetyManager.SetCustomProperty(ActiveDocument, "MycustomPropert", 10);
-            propetyManager.SetCustomProperty(ActiveDocument, "MycustomPropert2", true);
+            //Get partNo of active document
+            var partNo = App.ActiveDocument.GetProperty(kDocumnetProperty.PartNumber);
+
+            //cast into string...
+            if (partNo.Value is string value)
+
+                //return value if successful
+                return value;
+
+            //return not found if un-successful
+            return "not found";
         }
     }
 }

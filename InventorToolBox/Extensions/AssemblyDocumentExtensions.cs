@@ -1,11 +1,10 @@
 ﻿using Inventor;
-using InventorToolBox.Managers;
 using System;
 
 namespace InventorToolBox
 
 {
-    public class BomManager : IManager
+    public static class AssemblyDocumentExtensions
     {
         /// <summary>
         /// returns BOMQuantity of specified document in the assembly document.
@@ -15,7 +14,7 @@ namespace InventorToolBox
         /// <param name="assembly">assembly where the document resides</param>
         /// <param name="bomViewType">type of bom view defined in inventor assembly environment</param>
         /// <returns>BOMQuantity</returns>
-        public BOMQuantity GetBomQuantity(Document targetDoc, AssemblyDocument assembly, BOMViewTypeEnum bomViewType)
+        public static BOMQuantity GetBomQuantity(this AssemblyDocument assembly, Document targetDoc , BOMViewTypeEnum bomViewType)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -72,7 +71,7 @@ namespace InventorToolBox
         /// <param name="assembly"></param>
         /// <param name="countPhantomAndReference">if document is set to phantom or reference</param>
         /// <returns></returns>
-        public int GetStructuredQuantity(Document targetDoc, AssemblyDocument assembly, bool countPhantomAndReference = false)
+        public static int GetStructuredQuantity(this AssemblyDocument assembly, Document targetDoc,  bool countPhantomAndReference = false)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -106,7 +105,7 @@ namespace InventorToolBox
         /// <param name="targetDoc"></param>
         /// <param name="assembly"></param>
         /// <returns>int32 number of targetDoc in the assembly</returns>
-        public int GetPartsOnlyQuantity(Document targetDoc, AssemblyDocument assembly, bool countPhantomAndReference = false)
+        public static int GetPartsOnlyQuantity(this AssemblyDocument assembly, Document targetDoc, bool countPhantomAndReference = false)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");

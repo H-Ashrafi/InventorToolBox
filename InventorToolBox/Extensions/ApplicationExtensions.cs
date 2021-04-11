@@ -1,7 +1,7 @@
 ﻿using Inventor;
 namespace InventorToolBox
 {
-    public static class DocumentExtensions
+    public static class ApplicationExtensions
     {
         /// <summary>
         /// creates a new part document
@@ -69,6 +69,13 @@ namespace InventorToolBox
             {
                 return App.ActiveDocument as PartDocument;
             }
+            return null;
+        }
+
+        public static Document GetDocument(this Application InventorApplicaiton, string fullFileName, bool openVisible = true)
+        {
+            if (System.IO.File.Exists(fullFileName))
+                return InventorApplicaiton.Documents.Open(fullFileName, openVisible);
             return null;
         }
     }

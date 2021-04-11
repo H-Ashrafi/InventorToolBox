@@ -39,6 +39,7 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\Program Files\Autodesk\InventorCompatibilityPack\Inventor Server\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,21 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Document.Extensions.cs" />
-    <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="Managers\BomManager.cs" />
-    <Compile Include="Managers\DocumentManager.cs" />
-    <Compile Include="Managers\DrawingManager.cs" />
+    <Compile Include="Extensions\ApplicationExtensions.cs" />
+    <Compile Include="Extensions\DocumentExtensions.cs" />
+    <Compile Include="Extensions\PartDocumentExtensions.cs" />
+    <Compile Include="Extensions\AssemblyDocumentExtensions.cs" />
     <Compile Include="enumerators.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Extensions\ComponentOccurances.Extensions.cs" />
-    <Compile Include="Managers\IManager.cs" />
-    <Compile Include="Managers\iPropertiesManager.cs" />
-    <Compile Include="Managers\PartManager.cs" />
-    <Compile Include="Managers\PresentationManger.cs" />
+    <Compile Include="Extensions\ComponentOccurancesExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Managers\SketchManager.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Managers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

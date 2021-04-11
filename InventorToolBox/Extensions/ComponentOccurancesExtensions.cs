@@ -1,20 +1,29 @@
 ﻿using Inventor;
 using System.Collections.Generic;
 
-namespace InventorToolBox.Managers
+namespace InventorToolBox
 {
     /// <summary>
-    /// Extensions on invnetor Interfaces
+    /// Extensions on <see cref="ComponentOccurrences"/>
     /// </summary>
     public static class ComponentOccurancesExtension
     {
-        private static List<ComponentOccurrence> _list = new List<ComponentOccurrence>();
+        #region private fields
 
+        private static List<ComponentOccurrence> _list = new List<ComponentOccurrence>();
+        #endregion
+
+        #region private methode/fuctions
+
+        /// <summary>
+        /// recursively processes a document and adds componets to a private filed <see cref="_list"/>
+        /// </summary>
+        /// <param name="componentOccurrences"></param>
+        /// <param name="targetDoc"></param>
         private static void CalculateAllNonPhantomNonReferencedOccurances(ComponentOccurrences componentOccurrences, object targetDoc)
         {
             foreach (ComponentOccurrence occurrence in componentOccurrences)
             {
-
                 if (occurrence.Definition.BOMStructure != BOMStructureEnum.kReferenceBOMStructure
                    &&
                    occurrence.Definition.BOMStructure != BOMStructureEnum.kPhantomBOMStructure)
@@ -30,8 +39,10 @@ namespace InventorToolBox.Managers
                 }
             }
         }
+        #endregion
+
         /// <summary>
-        /// list of occuraces that are not phantom or referenced in their document settings.
+        /// list of occuraces that are not phantom nor are set as referenced in their document settings.
         /// </summary>
         /// <param name="targetDoc">the document that needs to be searched for</param>
         /// <returns>List<ComponentOccurrence></returns>

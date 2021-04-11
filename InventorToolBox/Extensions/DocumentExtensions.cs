@@ -1,10 +1,21 @@
 ﻿using Inventor;
 using System;
+
 namespace InventorToolBox
 {
-    public class iPropertiesManager:IManager
+    /// <summary>
+    /// extension for <see cref="Document"/>
+    /// </summary>
+    public static class DocumentExtensions
     {
-        private Property GetProperty(Document doc, string propetySet, string propertyName)
+        /// <summary>
+        /// gets the value of a property based on its property-set and name
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="propetySet"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        private static Property GetProperty(Document doc, string propetySet, string propertyName)
         {
             try
             {
@@ -19,14 +30,20 @@ namespace InventorToolBox
             }
         }
 
-        public Property GetProperty(Document doc, kDocumnetProperty property)
+        /// <summary>
+        /// get value of a <see cref="Property"/> in iProperty 
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="propertyType">the type of property to retrive the value of</param>
+        /// <returns></returns>
+        public static Property GetProperty(this Document doc, kDocumnetProperty propertyType)
         {
 
             string trackSet = "Design Tracking Properties";
             string docSet = "Inventor Document Summary Information";
             string sumSet = "Inventor Summary Information";
 
-            switch (property)
+            switch (propertyType)
             {
                 case kDocumnetProperty.Authority:
                     return GetProperty(doc, trackSet, "Authority");
@@ -138,7 +155,7 @@ namespace InventorToolBox
         /// <param name="doc">Inventor.Document object</param>
         /// <param name="name">name of the property</param>
         /// <returns></returns>
-        public Property GetCustomProperty(Document doc, string name)
+        public static Property GetCustomProperty(this Document doc, string name)
         {
             return GetProperty(doc, "Inventor User Defined Properties", name);
         }
@@ -149,7 +166,7 @@ namespace InventorToolBox
         /// <param name="doc">inventor.document object</param>
         /// <param name="property">kDocumnetProperty enumeration</param>
         /// <param name="value">the value to assign to property</param>
-        public void SetProperty(Document doc, kDocumnetProperty property, object value)
+        public static void SetProperty(this Document doc, kDocumnetProperty property, object value)
         {
             Property emptyProp = GetProperty(doc, property);
             Type tp = emptyProp.Value.GetType();
@@ -170,7 +187,7 @@ namespace InventorToolBox
         /// <param name="doc"></param>
         /// <param name="property"></param>
         /// <param name="value"></param>
-        public void SetCustomProperty(Document doc, string property, object value)
+        public static void SetCustomProperty(this Document doc, string property, object value)
         {
             // Get the custom property set. 
             PropertySet customPropSet = doc.PropertySets["Inventor User Defined Properties"];

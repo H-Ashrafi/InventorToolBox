@@ -54,7 +54,7 @@ namespace InventorToolBox
                 case kManagerTypes.Drawing:return new DrawingManager();
                 case kManagerTypes.Presentation:return new PresentationManger();
                 case kManagerTypes.iProperties:return new iPropertiesManager();
-                case kManagerTypes.BOM:return new BomManager();
+                case kManagerTypes.BOM:return new AssemblyDocumentExtensions();
                 default: return null;
             }
         }

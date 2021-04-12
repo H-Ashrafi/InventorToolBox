@@ -1,6 +1,24 @@
-# Overview
-Autodesk Inventor is a computer-aided design application for 3D mechanical design, simulation, visualization, and documentation developed by Autodesk.
-This library provides a more user-friendly and more efficient approach to work with its API.
+# Inventor Toolbox OverView 🧰
+This is a library of usefull extension and helper methodes for Autodesk Inventor API. 
 
-# Language
-C# and VB.NET(added as dll).
+|These Inventor Interfaces are covered|
+|----------------------------------|
+|Application|
+|AssemblyDocument|
+|ComponentOccurances|
+|Documen|
+|PartDocument|
+
+# Samlpe
+```csharp
+using InventorToolBox;
+//set up a console app
+//get an instance of Inventor
+            App.ConnectToInventor();
+
+            //Get partNo of active document
+            var partNo = App.ActiveDocument.GetProperty(kDocumnetProperty.PartNumber);
+```
+[.CS file here](https://github.com/H-Ashrafi/InventorToolBox/blob/master/InventorToolBoxConsole/Program.cs)
+## Language
+C# 

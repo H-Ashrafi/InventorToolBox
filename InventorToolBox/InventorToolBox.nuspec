@@ -8,9 +8,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/H-Ashrafi/InventorToolBox/</projectUrl>
-    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
+    <iconUrl>https://github.com/H-Ashrafi/InventorToolBox/blob/master/InventorToolBox/toolbox.ico/</iconUrl>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Initial release.</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Inventor API lib library macro vba ilogic</tags>
   </metadata>

@@ -1,5 +1,0 @@
-C:\Users\LocalUser\source\repos\InventorToolBox\Interfaces\bin\Debug\Interfaces.dll
-C:\Users\LocalUser\source\repos\InventorToolBox\Interfaces\bin\Debug\Interfaces.pdb
-C:\Users\LocalUser\source\repos\InventorToolBox\Interfaces\obj\Debug\Interfaces.csprojAssemblyReference.cache
-C:\Users\LocalUser\source\repos\InventorToolBox\Interfaces\obj\Debug\Interfaces.dll
-C:\Users\LocalUser\source\repos\InventorToolBox\Interfaces\obj\Debug\Interfaces.pdb

@@ -1,15 +1,15 @@
 # Inventor Toolbox OverView 🧰
-This is a library of usefull extension and helper methodes for Autodesk Inventor API. 
+This is a library of use-full extension and helper methods for Autodesk Inventor API. 
 
 |These Inventor Interfaces are covered|
 |----------------------------------|
 |Application|
 |AssemblyDocument|
 |ComponentOccurances|
-|Documen|
+|Document|
 |PartDocument|
 
-# Samlpe
+# Sample
 ```csharp
 using InventorToolBox;
 //set up a console app

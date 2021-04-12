@@ -1,0 +1,12 @@
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\InventorToolBox.dll
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\InventorToolBox.pdb
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\Autodesk.iLogic.Interfaces.dll
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\Autodesk.iLogic.Types.dll
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\Autodesk.iLogic.Interfaces.xml
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\Autodesk.iLogic.Types.xml
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\bin\Release\en-US\Autodesk.iLogic.Types.resources.dll
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\obj\Release\InventorToolBox.csprojAssemblyReference.cache
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\obj\Release\InventorToolBox.csproj.CoreCompileInputs.cache
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\obj\Release\InventorToolBox.csproj.CopyComplete
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\obj\Release\InventorToolBox.dll
+C:\Users\Ashra\source\repos\InventorToolBox\InventorToolBox\obj\Release\InventorToolBox.pdb

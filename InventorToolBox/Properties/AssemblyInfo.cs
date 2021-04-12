@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("InventorToolBox")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This is a library of usefull extension and helper methodes for Autodesk Inventor API.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InventorToolBox")]
+[assembly: AssemblyCompany("HYMMA.net")]
+[assembly: AssemblyProduct("Inventor API Toolbox")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

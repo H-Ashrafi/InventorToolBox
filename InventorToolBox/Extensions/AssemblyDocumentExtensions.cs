@@ -1,11 +1,45 @@
 ﻿using Inventor;
 using System;
+using System.Collections.Generic;
 
 namespace InventorToolBox
 
 {
     public static class AssemblyDocumentExtensions
     {
+        #region private fields
+
+        private static List<ComponentOccurrence> _list = new List<ComponentOccurrence>();
+        #endregion
+
+        #region private methode/fuctions
+
+        /// <summary>
+        /// recursively processes a document and adds componets to a private filed <see cref="_list"/>
+        /// </summary>
+        /// <param name="componentOccurrences"></param>
+        /// <param name="targetDoc"></param>
+        private static void CalculateAllNonPhantomNonReferencedOccurances(ComponentOccurrences componentOccurrences, object targetDoc)
+        {
+            foreach (ComponentOccurrence occurrence in componentOccurrences)
+            {
+                if (occurrence.Definition.BOMStructure != BOMStructureEnum.kReferenceBOMStructure
+                   &&
+                   occurrence.Definition.BOMStructure != BOMStructureEnum.kPhantomBOMStructure)
+                {
+                    if (occurrence.Definition.Document == targetDoc)
+                    {
+                        _list.Add(occurrence);
+                    }
+                    else if (occurrence.DefinitionDocumentType == DocumentTypeEnum.kAssemblyDocumentObject)
+                    {
+                        CalculateAllNonPhantomNonReferencedOccurances(occurrence.Definition.Occurrences, targetDoc);
+                    }
+                }
+            }
+        }
+        #endregion
+
         /// <summary>
         /// returns BOMQuantity of specified document in the assembly document.
         /// BOMQuantity gives you access to quantity units and such.
@@ -91,7 +125,7 @@ namespace InventorToolBox
             }
             else
             {
-                foreach (ComponentOccurrence occurrence in assembly.ComponentDefinition.Occurrences.AllNonPhantomNonReferencedOccurances(targetDoc))
+                foreach (ComponentOccurrence occurrence in assembly.AllNonPhantomNonReferencedOccurances(targetDoc))
                 {
                     counter++;
                 }
@@ -125,12 +159,24 @@ namespace InventorToolBox
             }
             else
             {
-                foreach (ComponentOccurrence occurrence in assembly.ComponentDefinition.Occurrences.AllNonPhantomNonReferencedOccurances(targetDoc))
+                foreach (ComponentOccurrence occurrence in assembly.AllNonPhantomNonReferencedOccurances(targetDoc))
                 {
                     counter++;
                 }
             }
             return counter;
+        }
+
+        /// <summary>
+        /// list of occuraces that are not phantom nor are set as referenced in their document settings.
+        /// </summary>
+        /// <param name="targetDoc">the document that needs to be searched for</param>
+        /// <returns>List<ComponentOccurrence></returns>
+        public static List<ComponentOccurrence> AllNonPhantomNonReferencedOccurances(this AssemblyDocument assembly, object targetDoc)
+        {
+            ComponentOccurrences componentOccurrences = assembly.ComponentDefinition.Occurrences;
+            CalculateAllNonPhantomNonReferencedOccurances(componentOccurrences, targetDoc);
+            return _list;
         }
     }
 }

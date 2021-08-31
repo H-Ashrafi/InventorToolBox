@@ -12,3 +12,13 @@ C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\Autodesk.iLogic.Interfaces.xml
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\Autodesk.iLogic.Types.xml
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\en-US\Autodesk.iLogic.Types.resources.dll
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.csproj.CoreCompileInputs.cache
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.exe.config
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.exe
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBoxConsole.pdb
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBox.dll
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\bin\Debug\InventorToolBox.pdb
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.csproj.AssemblyReference.cache
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.csproj.CopyComplete
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.exe
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBoxConsole\obj\Debug\InventorToolBoxConsole.pdb

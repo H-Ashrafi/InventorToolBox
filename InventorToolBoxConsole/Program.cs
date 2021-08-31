@@ -1,4 +1,5 @@
-﻿using InventorToolBox;
+﻿using Inventor;
+using InventorToolBox;
 using System;
 
 namespace InventorToolBoxConsole
@@ -25,10 +26,12 @@ namespace InventorToolBoxConsole
         private static string GetPartNumberOfActiveDocument()
         {
             //get an instance of Inventor
-            App.ConnectToInventor();
+            var app = App.ConnectToInventor();
+            var part = app.NewPart();
+            var sketch = part.AddSketch(KMainPlane.xy);
 
             //Get partNo of active document
-            var partNo = App.ActiveDocument.GetProperty(kDocumnetProperty.PartNumber);
+            var partNo = part.AsDocument().GetProperty(kDocumnetProperty.PartNumber);
 
             //cast into string...
             if (partNo.Value is string value)

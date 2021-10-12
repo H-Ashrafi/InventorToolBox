@@ -62,7 +62,8 @@ namespace InventorToolBox
         public PartDocument NewPart(string templateFileName="",bool CreateVisible=true)
         {
             Documents docs = InventorApp.Documents;
-            return (PartDocument)docs.Add(DocumentTypeEnum.kPartDocumentObject,templateFileName,CreateVisible);
+            var part = (PartDocument)docs.Add(DocumentTypeEnum.kPartDocumentObject,templateFileName,CreateVisible);
+            return part;
         }
 
         /// <summary>

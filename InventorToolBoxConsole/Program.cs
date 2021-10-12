@@ -28,6 +28,10 @@ namespace InventorToolBoxConsole
             //get an instance of Inventor
             var app = App.ConnectToInventor();
             var part = app.NewPart();
+            part.SaveAs("SS6742", true);
+            part.AsDocument().SetProperty(kDocumnetProperty.PartNumber, "S/S6758");
+            var assy = app.NewAssembly();
+            var occ = assy.AddOccurance(app.InventorApp, part, new[] { 0d, 0d, 0d }, 0);
             var sketch = part.AddSketch(KMainPlane.xy);
 
             //Get partNo of active document

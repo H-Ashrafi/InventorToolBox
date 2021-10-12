@@ -41,6 +41,16 @@ namespace InventorToolBox
         #endregion
 
         /// <summary>
+        /// cast this object to <see cref="Document"/>
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static Document AsDocument(this AssemblyDocument assembly)
+        {
+            return assembly as Document;
+        }
+
+        /// <summary>
         /// returns BOMQuantity of specified document in the assembly document.
         /// BOMQuantity gives you access to quantity units and such.
         /// </summary>
@@ -177,6 +187,43 @@ namespace InventorToolBox
             ComponentOccurrences componentOccurrences = assembly.ComponentDefinition.Occurrences;
             CalculateAllNonPhantomNonReferencedOccurances(componentOccurrences, targetDoc);
             return _list;
+        }
+
+        /// <summary>
+        /// places a part in assembly and returns the created occurance
+        /// </summary>
+        /// <param name="assemby"></param>
+        /// <param name="inventor">inventor assembly</param>
+        /// <param name="part">part to save in assembly</param>
+        /// <param name="position">position in assembly</param>
+        /// <param name="rotation">rotation about the Z axis in degrees</param>
+        /// <returns><see cref="ComponentOccurrence"/> that is created inside the assembly</returns>
+        public static ComponentOccurrence AddOccurance(this AssemblyDocument assemby,Application inventor, PartDocument part, double[] position, double rotation)
+        {
+            if (part.FullFileName == "")
+                throw new Exception("FullFileName of the part object was null, you need to save the part before passing to this method");
+            if (position.Length > 3)
+                throw new ArgumentOutOfRangeException("length of postion array cannot be more than 3");
+
+            // Set a reference to the assembly component definition.
+            AssemblyComponentDefinition oAsmCompDef = assemby.ComponentDefinition;
+
+            // Set a reference to the transient geometry object.
+            TransientGeometry oTG = inventor.TransientGeometry;
+
+            // Create a matrix.  A new matrix is initialized with an identity matrix.
+            Matrix oMatrix = oTG.CreateMatrix();
+
+            // Set the rotation of the matrix for  rotation about the Z axis.
+            var radian = rotation * 3.14159265358979 / 180;
+            oMatrix.SetToRotation(radian,
+                oTG.CreateVector(0, 0, 1), oTG.CreatePoint(0, 0, 0));
+
+            // Set the translation portion of the matrix so the part will be positioned
+            oMatrix.SetTranslation(oTG.CreateVector(position[0],position[1],position[3]), true);
+
+            // Add the occurrence.
+           return oAsmCompDef.Occurrences.Add(part.FullFileName, oMatrix);
         }
     }
 }

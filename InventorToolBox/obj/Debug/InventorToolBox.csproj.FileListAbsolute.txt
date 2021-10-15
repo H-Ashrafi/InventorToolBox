@@ -12,3 +12,9 @@ C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBox\obj\Debug\Invent
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBox\bin\Debug\Autodesk.Inventor.Interop.dll
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBox\bin\Debug\stdole.dll
 C:\Users\LocalUser\source\repos\InventorToolBox\InventorToolBox\bin\Debug\Autodesk.Inventor.Interop.xml
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\bin\Debug\InventorToolBox.dll
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\bin\Debug\InventorToolBox.pdb
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\obj\Debug\InventorToolBox.csproj.AssemblyReference.cache
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\obj\Debug\InventorToolBox.csproj.CoreCompileInputs.cache
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\obj\Debug\InventorToolBox.dll
+C:\Users\Hashrafi\source\repos\InventorToolBox\InventorToolBox\obj\Debug\InventorToolBox.pdb

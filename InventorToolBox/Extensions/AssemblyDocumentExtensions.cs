@@ -1,11 +1,56 @@
 ﻿using Inventor;
+using InventorToolBox.Tools;
 using System;
+using System.Collections.Generic;
 
 namespace InventorToolBox
 
 {
     public static class AssemblyDocumentExtensions
     {
+        #region private fields
+
+        private static List<ComponentOccurrence> _list = new List<ComponentOccurrence>();
+        #endregion
+
+        #region private methode/fuctions
+
+        /// <summary>
+        /// recursively processes a document and adds componets to a private filed <see cref="_list"/>
+        /// </summary>
+        /// <param name="componentOccurrences"></param>
+        /// <param name="targetDoc"></param>
+        private static void CalculateAllNonPhantomNonReferencedOccurances(ComponentOccurrences componentOccurrences, object targetDoc)
+        {
+            foreach (ComponentOccurrence occurrence in componentOccurrences)
+            {
+                if (occurrence.Definition.BOMStructure != BOMStructureEnum.kReferenceBOMStructure
+                   &&
+                   occurrence.Definition.BOMStructure != BOMStructureEnum.kPhantomBOMStructure)
+                {
+                    if (occurrence.Definition.Document == targetDoc)
+                    {
+                        _list.Add(occurrence);
+                    }
+                    else if (occurrence.DefinitionDocumentType == DocumentTypeEnum.kAssemblyDocumentObject)
+                    {
+                        CalculateAllNonPhantomNonReferencedOccurances(occurrence.Definition.Occurrences, targetDoc);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// cast this object to <see cref="Document"/>
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static Document AsDocument(this AssemblyDocument assembly)
+        {
+            return assembly as Document;
+        }
+
         /// <summary>
         /// returns BOMQuantity of specified document in the assembly document.
         /// BOMQuantity gives you access to quantity units and such.
@@ -14,7 +59,7 @@ namespace InventorToolBox
         /// <param name="assembly">assembly where the document resides</param>
         /// <param name="bomViewType">type of bom view defined in inventor assembly environment</param>
         /// <returns>BOMQuantity</returns>
-        public static BOMQuantity GetBomQuantity(this AssemblyDocument assembly, Document targetDoc , BOMViewTypeEnum bomViewType)
+        public static BOMQuantity GetBomQuantity(this AssemblyDocument assembly, Document targetDoc, BOMViewTypeEnum bomViewType)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -71,7 +116,7 @@ namespace InventorToolBox
         /// <param name="assembly"></param>
         /// <param name="countPhantomAndReference">if document is set to phantom or reference</param>
         /// <returns></returns>
-        public static int GetStructuredQuantity(this AssemblyDocument assembly, Document targetDoc,  bool countPhantomAndReference = false)
+        public static int GetStructuredQuantity(this AssemblyDocument assembly, Document targetDoc, bool countPhantomAndReference = false)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -91,7 +136,7 @@ namespace InventorToolBox
             }
             else
             {
-                foreach (ComponentOccurrence occurrence in assembly.ComponentDefinition.Occurrences.AllNonPhantomNonReferencedOccurances(targetDoc))
+                foreach (ComponentOccurrence occurrence in assembly.AllNonPhantomNonReferencedOccurances(targetDoc))
                 {
                     counter++;
                 }
@@ -125,12 +170,78 @@ namespace InventorToolBox
             }
             else
             {
-                foreach (ComponentOccurrence occurrence in assembly.ComponentDefinition.Occurrences.AllNonPhantomNonReferencedOccurances(targetDoc))
+                foreach (ComponentOccurrence occurrence in assembly.AllNonPhantomNonReferencedOccurances(targetDoc))
                 {
                     counter++;
                 }
             }
             return counter;
+        }
+
+        /// <summary>
+        /// list of occuraces that are not phantom nor are set as referenced in their document settings.
+        /// </summary>
+        /// <param name="targetDoc">the document that needs to be searched for</param>
+        /// <returns>List<ComponentOccurrence></returns>
+        public static List<ComponentOccurrence> AllNonPhantomNonReferencedOccurances(this AssemblyDocument assembly, object targetDoc)
+        {
+            ComponentOccurrences componentOccurrences = assembly.ComponentDefinition.Occurrences;
+            CalculateAllNonPhantomNonReferencedOccurances(componentOccurrences, targetDoc);
+            return _list;
+        }
+
+        /// <summary>
+        /// Inserts a member (part/Subassembly or 3D model) in assembly and returns the created occurance
+        /// </summary>
+        /// <param name="assy"></param>
+        /// <param name="inventor">inventor assembly</param>
+        /// <param name="member">any of the supported <see cref="Document"/> types to insert into assembly</param>
+        /// <param name="position">position of the member relative to assembly's origin</param>
+        /// <param name="rotation">rotation about the X and Y and Z axis</param>
+        /// <returns><see cref="ComponentOccurrence"/> that is created inside the assembly</returns>
+        /// <remarks>remeber that Inventors internal units for length are centimeters</remarks>
+        public static ComponentOccurrence AddMemeber(this AssemblyDocument assy, Application inventor, Document member, double[] position, double[] rotation)
+        {
+            if (member.DocumentType == DocumentTypeEnum.kDrawingDocumentObject ||
+                member.DocumentType == DocumentTypeEnum.kNoDocument ||
+                member.DocumentType == DocumentTypeEnum.kPresentationDocumentObject ||
+                member.DocumentType == DocumentTypeEnum.kUnknownDocumentObject)
+                throw new ArgumentException("documnet type is not supported", nameof(member));
+
+            if (member.FullFileName == "")
+                throw new Exception("FullFileName of the part object was null, you need to save the part before passing to this method");
+
+            if (position.Length > 3 || rotation.Length > 3)
+                throw new ArgumentOutOfRangeException("position or rotaion array cannot have more than three memebers");
+
+            // Set a reference to the assembly component definition.
+            AssemblyComponentDefinition oAsmCompDef = assy.ComponentDefinition;
+
+            // Set a reference to the transient geometry object.
+            TransientGeometry oTG = inventor.TransientGeometry;
+
+            // Create a matrix.  A new matrix is initialized with an identity matrix.
+            Matrix tempMatrix = oTG.CreateMatrix();
+            Matrix transMatrix = oTG.CreateMatrix();
+
+            //for all rotational directions . . .
+            for (int i = 0; i < rotation.Length; i++)
+            {
+                var index = new List<int>(new[] { 0,0,0});
+                index[i] = 1;
+                var origin = oTG.CreatePoint(0, 0, 0);
+
+                //rotate about an axis that goeas through origin point and is along the rotaional direction
+                tempMatrix.SetToRotation(MathHelper.ToRadian(rotation[i]), oTG.CreateVector(index[0], index[1], index[2]), origin);
+                transMatrix.TransformBy(tempMatrix);
+                tempMatrix.SetToIdentity();
+            }
+
+            //move the object to the position 
+            transMatrix.SetTranslation(oTG.CreateVector(position[0], position[1], position[2]));
+
+            // Add the occurrence.
+            return oAsmCompDef.Occurrences.Add(member.FullFileName, transMatrix);
         }
     }
 }

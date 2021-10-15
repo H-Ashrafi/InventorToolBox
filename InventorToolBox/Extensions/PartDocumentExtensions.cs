@@ -13,7 +13,7 @@ namespace InventorToolBox
         /// <param name="plane"></param>
         /// <param name="ProjectEdges"></param>
         /// <returns></returns>
-        public static Sketch NewSketch(this PartDocument part, KMainPlane plane, bool ProjectEdges = false)
+        public static Sketch AddSketch(this PartDocument part, KMainPlane plane, bool ProjectEdges = false)
         {
             // get the component definition
             PartComponentDefinition partDef = part.ComponentDefinition;
@@ -23,6 +23,16 @@ namespace InventorToolBox
 
             //create a new sketch
             return partDef.Sketches.Add(workPlane, ProjectEdges) as Sketch;
+        }
+
+        /// <summary>
+        /// cast this object to <see cref="Document"/>
+        /// </summary>
+        /// <param name="part"></param>
+        /// <returns></returns>
+        public static Document AsDocument(this PartDocument part)
+        {
+            return part as Document;
         }
     }
 }

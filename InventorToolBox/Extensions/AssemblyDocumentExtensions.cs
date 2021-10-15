@@ -1,4 +1,5 @@
 ﻿using Inventor;
+using InventorToolBox.Tools;
 using System;
 using System.Collections.Generic;
 
@@ -58,7 +59,7 @@ namespace InventorToolBox
         /// <param name="assembly">assembly where the document resides</param>
         /// <param name="bomViewType">type of bom view defined in inventor assembly environment</param>
         /// <returns>BOMQuantity</returns>
-        public static BOMQuantity GetBomQuantity(this AssemblyDocument assembly, Document targetDoc , BOMViewTypeEnum bomViewType)
+        public static BOMQuantity GetBomQuantity(this AssemblyDocument assembly, Document targetDoc, BOMViewTypeEnum bomViewType)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -115,7 +116,7 @@ namespace InventorToolBox
         /// <param name="assembly"></param>
         /// <param name="countPhantomAndReference">if document is set to phantom or reference</param>
         /// <returns></returns>
-        public static int GetStructuredQuantity(this AssemblyDocument assembly, Document targetDoc,  bool countPhantomAndReference = false)
+        public static int GetStructuredQuantity(this AssemblyDocument assembly, Document targetDoc, bool countPhantomAndReference = false)
         {
             if (targetDoc == null)
                 throw new ArgumentNullException(nameof(targetDoc), "Null argument");
@@ -190,40 +191,57 @@ namespace InventorToolBox
         }
 
         /// <summary>
-        /// places a part in assembly and returns the created occurance
+        /// Inserts a member (part/Subassembly or 3D model) in assembly and returns the created occurance
         /// </summary>
-        /// <param name="assemby"></param>
+        /// <param name="assy"></param>
         /// <param name="inventor">inventor assembly</param>
-        /// <param name="part">part to save in assembly</param>
-        /// <param name="position">position in assembly</param>
-        /// <param name="rotation">rotation about the Z axis in degrees</param>
+        /// <param name="member">any of the supported <see cref="Document"/> types to insert into assembly</param>
+        /// <param name="position">position of the member relative to assembly's origin</param>
+        /// <param name="rotation">rotation about the X and Y and Z axis</param>
         /// <returns><see cref="ComponentOccurrence"/> that is created inside the assembly</returns>
-        public static ComponentOccurrence AddOccurance(this AssemblyDocument assemby,Application inventor, PartDocument part, double[] position, double rotation)
+        /// <remarks>remeber that Inventors internal units for length are centimeters</remarks>
+        public static ComponentOccurrence AddMemeber(this AssemblyDocument assy, Application inventor, Document member, double[] position, double[] rotation)
         {
-            if (part.FullFileName == "")
+            if (member.DocumentType == DocumentTypeEnum.kDrawingDocumentObject ||
+                member.DocumentType == DocumentTypeEnum.kNoDocument ||
+                member.DocumentType == DocumentTypeEnum.kPresentationDocumentObject ||
+                member.DocumentType == DocumentTypeEnum.kUnknownDocumentObject)
+                throw new ArgumentException("documnet type is not supported", nameof(member));
+
+            if (member.FullFileName == "")
                 throw new Exception("FullFileName of the part object was null, you need to save the part before passing to this method");
-            if (position.Length > 3)
-                throw new ArgumentOutOfRangeException("length of postion array cannot be more than 3");
+
+            if (position.Length > 3 || rotation.Length > 3)
+                throw new ArgumentOutOfRangeException("position or rotaion array cannot have more than three memebers");
 
             // Set a reference to the assembly component definition.
-            AssemblyComponentDefinition oAsmCompDef = assemby.ComponentDefinition;
+            AssemblyComponentDefinition oAsmCompDef = assy.ComponentDefinition;
 
             // Set a reference to the transient geometry object.
             TransientGeometry oTG = inventor.TransientGeometry;
 
             // Create a matrix.  A new matrix is initialized with an identity matrix.
-            Matrix oMatrix = oTG.CreateMatrix();
+            Matrix tempMatrix = oTG.CreateMatrix();
+            Matrix transMatrix = oTG.CreateMatrix();
 
-            // Set the rotation of the matrix for  rotation about the Z axis.
-            var radian = rotation * 3.14159265358979 / 180;
-            oMatrix.SetToRotation(radian,
-                oTG.CreateVector(0, 0, 1), oTG.CreatePoint(0, 0, 0));
+            //for all rotational directions . . .
+            for (int i = 0; i < rotation.Length; i++)
+            {
+                var index = new List<int>(new[] { 0,0,0});
+                index[i] = 1;
+                var origin = oTG.CreatePoint(0, 0, 0);
 
-            // Set the translation portion of the matrix so the part will be positioned
-            oMatrix.SetTranslation(oTG.CreateVector(position[0],position[1],position[3]), true);
+                //rotate about an axis that goeas through origin point and is along the rotaional direction
+                tempMatrix.SetToRotation(MathHelper.ToRadian(rotation[i]), oTG.CreateVector(index[0], index[1], index[2]), origin);
+                transMatrix.TransformBy(tempMatrix);
+                tempMatrix.SetToIdentity();
+            }
+
+            //move the object to the position 
+            transMatrix.SetTranslation(oTG.CreateVector(position[0], position[1], position[2]));
 
             // Add the occurrence.
-           return oAsmCompDef.Occurrences.Add(part.FullFileName, oMatrix);
+            return oAsmCompDef.Occurrences.Add(member.FullFileName, transMatrix);
         }
     }
 }
